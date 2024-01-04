@@ -16,6 +16,26 @@ The Amazon Campaign Creation Tool is a Streamlit app designed to automate the pr
 5. **Generate Campaign File**: If no errors are found, you can proceed to generate the campaign file. Choose your preference for 'Broad and Phrase Campaign Cross Negation' from the dropdown menu.
 6. **Download Campaign File**: Click on 'Generate Campaign File'. The app will process the data and provide a button to download the generated Excel campaign file.
 
+## Mandatory Input Fields
+The following fields are mandatory for the campaign creation process:
+1. **ASIN**: Must start with 'B0' and be 10 characters in length.
+2. **Daily Budget**: A number between 2 and 1000.
+3. **Keyword Text**: Each word should not exceed 21 characters.
+4. **Match Type**: Must be 'exact', 'broad', or 'phrase'.
+5. **Bid**: A value between 0.02 and 15.
+6. **SKU**: Unique identifier for each product in your inventory.
+
+## Optional Fields
+- **Portfolio ID**
+- **Percentage** (for bidding adjustments)
+- **Naming Convention Tag**
+- **Bidding Strategy** (defaults to 'Dynamic bids - down only' if not provided)
+- **Placement** (used with 'Percentage' for bidding adjustments)
+
+## Broad and Phrase Campaign Cross Negation
+- **Yes**: Negative keywords are generated for broad and phrase campaigns to minimize overlap and internal competition.
+- **No**: Campaigns are created without cross negation.
+
 ## Dependencies
 - Streamlit
 - Pandas
