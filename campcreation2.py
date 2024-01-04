@@ -12,10 +12,22 @@ def generate_random_id(length=10):
 def validate_data(data):
     errors = []
     for i, row in data.iterrows():
-        if not (isinstance(row['ASIN'], str) and len(row['ASIN']) == 10 and row['ASIN'].startswith('B0')):
-            errors.append(f"Invalid ASIN in row {i+1}")
-        # Additional validations...
-
+        if not (str(row['ASIN']).startswith('B0') and len(str(row['ASIN'])) == 10):
+            errors.append(f'Invalid ASIN at row {i+1}')
+        if not isinstance(row['Daily Budget'], (int, float)) or not (2 <= row['Daily Budget'] <= 1000):
+            errors.append(f'Invalid Daily Budget at row {i+1}')
+        if any(len(word) > 21 for word in str(row['Keyword Text']).split()):
+            errors.append(f'Invalid Keyword Text at row {i+1}')
+        if str(row['Match Type']).lower() not in ['exact', 'broad', 'phrase']:
+            errors.append(f'Invalid Match Type at row {i+1}')
+        if not (0.02 <= row['Bid'] <= 15):
+            errors.append(f'Invalid Bid at row {i+1}')
+        if pd.notna(row['Portfolio ID']) and not isinstance(row['Portfolio ID'], (int, float)):
+            errors.append(f'Invalid Portfolio ID at row {i+1}')
+        if pd.notna(row['Percentage']) and not (0 <= row['Percentage'] <= 900):
+            errors.append(f'Invalid Percentage at row {i+1}')
+        if pd.notna(row['Naming convention tag']) and (len(str(row['Naming convention tag'])) > 10 or ' ' in str(row['Naming convention tag'])):
+            errors.append(f'Invalid Naming Convention Tag at row {i+1}')
     return errors
 
 def generate_campaign_file(data, cross_negation):
@@ -29,13 +41,13 @@ def generate_campaign_file(data, cross_negation):
 
         campaign_prefix = {'exact': 'OW_', 'broad': 'BR_', 'phrase': 'PH_'}
         campaign_name = campaign_prefix[row['Match Type'].lower()] + row['ASIN']
-        if pd.notna(row['Naming convention tag']):
+        if pd.notna(row['Naming convention tag']) and row['Naming convention tag']:
             campaign_name += '_' + row['Naming convention tag']
         campaign_name += '_' + row['Keyword Text']
 
         start_date = datetime.now().strftime("%Y%m%d")
 
-        # Campaign row
+        # Campaign row with Portfolio ID
         output_rows.append({
             'Product': 'Sponsored Products',
             'Entity': 'Campaign',
@@ -46,7 +58,8 @@ def generate_campaign_file(data, cross_negation):
             'Targeting Type': 'manual',
             'State': 'enabled',
             'Daily Budget': row['Daily Budget'],
-            'Bidding Strategy': row['Bidding Strategy'] if pd.notna(row['Bidding Strategy']) else 'Dynamic bids - down only'
+            'Bidding Strategy': row['Bidding Strategy'] if pd.notna(row['Bidding Strategy']) and row['Bidding Strategy'] else 'Dynamic bids - down only',
+            'Portfolio ID': row['Portfolio ID'] if pd.notna(row['Portfolio ID']) else ''
         })
 
         # Ad Group row
