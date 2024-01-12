@@ -10,7 +10,7 @@ The Amazon Campaign Creation Tool is a Streamlit app designed to automate the pr
 
 ## How to Use
 1. **Prepare Your Data**: Use the provided [input template](https://docs.google.com/spreadsheets/d/19_F0eC94plDEhyUsabXqVtb1c7ymuJZwxJlRLsldcCE/edit#gid=0) to format your campaign data. Ensure all fields are filled out correctly.
-2. **Launch the App**: Start the Streamlit app. You'll see an interface with an option to upload your CSV file.
+2. **Launch the App**: Start the [Streamlit app](https://campaigncreationapp.streamlit.app/). You'll see an interface with an option to upload your CSV file.
 3. **Upload CSV File**: Click on 'Choose a CSV file' and select your prepared CSV file.
 4. **Data Validation**: Once uploaded, the app automatically validates the data. If there are any errors, they will be displayed, and you'll have the option to download an error report.
 5. **Generate Campaign File**: If no errors are found, you can proceed to generate the campaign file. Choose your preference for 'Broad and Phrase Campaign Cross Negation' from the dropdown menu.
