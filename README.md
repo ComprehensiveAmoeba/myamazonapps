@@ -9,7 +9,7 @@ The Amazon Campaign Creation Tool is a Streamlit app designed to automate the pr
 - **Error Reporting**: Identifies and reports any data inconsistencies.
 
 ## How to Use
-1. **Prepare Your Data**: Use the provided [input template]([https://docs.google.com/spreadsheets/d/19_F0eC94plDEhyUsabXqVtb1c7ymuJZwxJlRLsldcCE/edit#gid=0]) to format your campaign data. Ensure all fields are filled out correctly.
+1. **Prepare Your Data**: Use the provided [input template](https://docs.google.com/spreadsheets/d/19_F0eC94plDEhyUsabXqVtb1c7ymuJZwxJlRLsldcCE/edit#gid=0) to format your campaign data. Ensure all fields are filled out correctly.
 2. **Launch the App**: Start the Streamlit app. You'll see an interface with an option to upload your CSV file.
 3. **Upload CSV File**: Click on 'Choose a CSV file' and select your prepared CSV file.
 4. **Data Validation**: Once uploaded, the app automatically validates the data. If there are any errors, they will be displayed, and you'll have the option to download an error report.
